@@ -1,111 +1,81 @@
 package com.legalimpurity.zomatorestauranttracker.data.model.api.response
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import android.os.Parcel
+import android.os.Parcelable
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Restaurant(
+@Entity(tableName = "Restaurants")
+class Restaurant() : Parcelable {
 
-	@field:SerializedName("include_bogo_offers")
-	val includeBogoOffers: Boolean? = null,
+    @PrimaryKey(autoGenerate = false)
+    @field:SerializedName("id")
+    var id: String? = null
 
-	@field:SerializedName("has_online_delivery")
-	val hasOnlineDelivery: Int? = null,
+    @Expose
+    @ColumnInfo(name = "featuredImage")
+    @field:SerializedName("featured_image")
+    var featured_image: String? = null
 
-	@field:SerializedName("has_table_booking")
-	val hasTableBooking: Int? = null,
+    @Expose
+    @ColumnInfo(name = "thumb")
+    @field:SerializedName("thumb")
+    var thumb: String? = null
 
-	@field:SerializedName("thumb")
-	val thumb: String? = null,
+    @Expose
+    @ColumnInfo(name = "menuUrl")
+    @field:SerializedName("menu_url")
+    var menuUrl: String? = null
 
-	@field:SerializedName("average_cost_for_two")
-	val averageCostForTwo: Int? = null,
+    @Expose
+    @ColumnInfo(name = "eventsUrl")
+    @field:SerializedName("events_url")
+    var eventsUrl: String? = null
 
-	@field:SerializedName("menu_url")
-	val menuUrl: String? = null,
+    @Expose
+    @ColumnInfo(name = "name")
+    @field:SerializedName("name")
+    var name: String? = null
 
-	@field:SerializedName("price_range")
-	val priceRange: Int? = null,
+    @Expose
+    @ColumnInfo(name = "photosUrl")
+    @field:SerializedName("photos_url")
+    var photosUrl: String? = null
 
-	@field:SerializedName("order_deeplink")
-	val orderDeeplink: String? = null,
+    constructor(parcel: Parcel) : this() {
+        id = parcel.readString()
+        featured_image = parcel.readString()
+        thumb = parcel.readString()
+        menuUrl = parcel.readString()
+        eventsUrl = parcel.readString()
+        name = parcel.readString()
+        photosUrl = parcel.readString()
+    }
 
-	@field:SerializedName("switch_to_order_menu")
-	val switchToOrderMenu: Int? = null,
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(featured_image)
+        parcel.writeString(thumb)
+        parcel.writeString(menuUrl)
+        parcel.writeString(eventsUrl)
+        parcel.writeString(name)
+        parcel.writeString(photosUrl)
+    }
 
-	@field:SerializedName("order_url")
-	val orderUrl: String? = null,
+    override fun describeContents(): Int {
+        return 0
+    }
 
-	@field:SerializedName("R")
-	val R: R? = null,
+    companion object CREATOR : Parcelable.Creator<Restaurant> {
+        override fun createFromParcel(parcel: Parcel): Restaurant {
+            return Restaurant(parcel)
+        }
 
-	@field:SerializedName("is_table_reservation_supported")
-	val isTableReservationSupported: Int? = null,
-
-	@field:SerializedName("currency")
-	val currency: String? = null,
-
-	@field:SerializedName("opentable_support")
-	val opentableSupport: Int? = null,
-
-	@field:SerializedName("id")
-	val id: String? = null,
-
-	@field:SerializedName("user_rating")
-	val userRating: UserRating? = null,
-
-	@field:SerializedName("offers")
-	val offers: List<Any?>? = null,
-
-	@field:SerializedName("apikey")
-	val apikey: String? = null,
-
-	@field:SerializedName("is_delivering_now")
-	val isDeliveringNow: Int? = null,
-
-	@field:SerializedName("deeplink")
-	val deeplink: String? = null,
-
-	@field:SerializedName("is_zomato_book_res")
-	val isZomatoBookRes: Int? = null,
-
-	@field:SerializedName("featured_image")
-	val featuredImage: String? = null,
-
-	@field:SerializedName("url")
-	val url: String? = null,
-
-	@field:SerializedName("cuisines")
-	val cuisines: String? = null,
-
-	@field:SerializedName("events_url")
-	val eventsUrl: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("location")
-	val location: Location? = null,
-
-	@field:SerializedName("book_again_url")
-	val bookAgainUrl: String? = null,
-
-	@field:SerializedName("is_book_form_web_view")
-	val isBookFormWebView: Int? = null,
-
-	@field:SerializedName("book_form_web_view_url")
-	val bookFormWebViewUrl: String? = null,
-
-	@field:SerializedName("mezzo_provider")
-	val mezzoProvider: String? = null,
-
-	@field:SerializedName("photos_url")
-	val photosUrl: String? = null,
-
-	@field:SerializedName("book_url")
-	val bookUrl: String? = null,
-
-	@field:SerializedName("medio_provider")
-	val medioProvider: Int? = null,
-
-	@field:SerializedName("zomato_events")
-	val zomatoEvents: List<ZomatoEventsItem?>? = null
-)
+        override fun newArray(size: Int): Array<Restaurant?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
