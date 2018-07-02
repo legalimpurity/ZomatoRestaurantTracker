@@ -4,22 +4,76 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.legalimpurity.zomatorestauranttracker"
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', 'ZomatoAPIKEY', ZomatoAPIKEY
+        }
         release {
             minifyEnabled false
+            buildConfigField 'String', 'ZomatoAPIKEY', ZomatoAPIKEY
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLib"
+    implementation "com.android.support:design:$rootProject.supportLib"
+    implementation "com.android.support:support-v4:$rootProject.supportLib"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLib"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutLib"
+
+    // dependency injection
+    // Dagger Core
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
+
+    // Dagger Android
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger2Version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
+
+    // Android Lifecycle
+    implementation "android.arch.lifecycle:extensions:$rootProject.AndroidArchVer"
+    kapt "android.arch.lifecycle:compiler:$rootProject.AndroidArchVer"
+
+    // Reactive
+    implementation "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
+
+    // Parser
+    implementation "com.google.code.gson:gson:$rootProject.gson"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$project.rxJavaAdapter"
+
+    // OKHttp
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp"
+
+
+    // logger
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    // database
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.roomDatabase"
+    kapt "android.arch.persistence.room:compiler:$rootProject.roomDatabase"
 }
 
 dependencies {
