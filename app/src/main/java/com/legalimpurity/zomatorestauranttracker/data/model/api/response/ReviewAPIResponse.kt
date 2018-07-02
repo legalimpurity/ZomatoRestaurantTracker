@@ -2,7 +2,7 @@ package com.legalimpurity.zomatorestauranttracker.data.model.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ReviewResponse(
+data class ReviewAPIResponse(
 
 	@field:SerializedName("reviews_start")
 	val reviewsStart: Int? = null,
