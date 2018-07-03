@@ -44,6 +44,12 @@
                 android:onClick="@{() -> viewModel.loadRestaurantsForCoordinates()}"
                 app:layout_constraintStart_toEndOf="@+id/etLongitude"/>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvRestaurantsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/etLatitude"
+                app:adapter="@{viewModel.restaurantItemsObservableArrayList}"/>
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>
