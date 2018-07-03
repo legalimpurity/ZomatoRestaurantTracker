@@ -7,13 +7,15 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.reactivex.annotations.NonNull
 
 @Entity(tableName = "Restaurants")
 class Restaurant() : Parcelable {
 
     @PrimaryKey(autoGenerate = false)
+    @NonNull
     @field:SerializedName("id")
-    var id: String? = null
+    var id: String = ""
 
     @Expose
     @ColumnInfo(name = "featuredImage")

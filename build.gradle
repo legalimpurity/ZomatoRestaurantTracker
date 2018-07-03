@@ -32,13 +32,12 @@ ext {
     // Sdk and tools
     minSdkVersion = 14
     targetSdkVersion = 26
-    compileSdkVersion = 27
+    compileSdkVersion = 28
 
     // Dagger Version
     dagger2Version = '2.11'
 
     // Support Libraries Version
-//    supportLib = '26.1.0'
     supportLib = '28.0.0-alpha3'
     constraintLayoutLib = '1.0.2'
 
