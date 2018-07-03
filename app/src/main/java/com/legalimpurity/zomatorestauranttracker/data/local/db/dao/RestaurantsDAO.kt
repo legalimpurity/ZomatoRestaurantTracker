@@ -13,5 +13,5 @@ interface RestaurantsDAO
     fun loadRestaurantsWithIds(listOfIds : String): List<Restaurant>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(restaurants: List<Restaurant>)
+    fun insertAll(restaurants: List<Restaurant?>?)
 }

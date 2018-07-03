@@ -17,10 +17,10 @@ class DatabaseHelperImplementation @Inject constructor(private val mAppDatabase:
         nearbyRestaurantRecord.listOfIds?.let { mAppDatabase.restaurantsDAO().loadRestaurantsWithIds(it) }
     }
 
-    override fun setLocalGeocodeResponse(lat: Double, lon: Double, listOfRestaurants: List<Restaurant>?) = Observable.fromCallable<Boolean> {
+    override fun setLocalGeocodeResponse(lat: Double, lon: Double, listOfRestaurants: List<Restaurant?>?) = Observable.fromCallable<Boolean> {
         var stringBufferForIds = StringBuffer()
         listOfRestaurants?.forEach { restaurant ->
-            stringBufferForIds.append(restaurant.id)
+            stringBufferForIds.append(restaurant?.id)
             stringBufferForIds.append(",")
         }
         val nearbyRestaurantRecord = NearbyRestaurantRecord()
@@ -28,6 +28,11 @@ class DatabaseHelperImplementation @Inject constructor(private val mAppDatabase:
         nearbyRestaurantRecord.longitude = lon
         nearbyRestaurantRecord.listOfIds = stringBufferForIds.toString()
         mAppDatabase.nearbyRestaurantsRecordsDAO().insert(nearbyRestaurantRecord)
+        true
+    }
+
+    override fun addOrUpdateRestaurants(listOfRestaurants: List<Restaurant?>?) = Observable.fromCallable {
+        mAppDatabase.restaurantsDAO().insertAll(listOfRestaurants)
         true
     }
 }
