@@ -9,15 +9,15 @@ import javax.inject.Singleton
 @Singleton
 class DatabaseHelperImplementation @Inject constructor(private val mAppDatabase: AppDatabase) : DatabaseHelper {
 
-    override fun getGeocodeNearbyRestaurantsList(lat: Double, lon: Double) = Observable.fromCallable<NearbyRestaurantRecord> {
+    override fun getLocalGeocodeNearbyRestaurantsList(lat: Double, lon: Double) = Observable.fromCallable<NearbyRestaurantRecord> {
         mAppDatabase.nearbyRestaurantsRecordsDAO().getRestaurantsList(lat,lon)
     }
 
-    override fun getGeocodeResponse(lat: Double, lon: Double) = getGeocodeNearbyRestaurantsList(lat,lon).map { nearbyRestaurantRecord ->
+    override fun getLocalGeocodeResponse(lat: Double, lon: Double) = getLocalGeocodeNearbyRestaurantsList(lat,lon).map { nearbyRestaurantRecord ->
         nearbyRestaurantRecord.listOfIds?.let { mAppDatabase.restaurantsDAO().loadRestaurantsWithIds(it) }
     }
 
-    override fun setGeocodeResponse(lat: Double, lon: Double, listOfRestaurants: List<Restaurant>?) = Observable.fromCallable<Boolean> {
+    override fun setLocalGeocodeResponse(lat: Double, lon: Double, listOfRestaurants: List<Restaurant>?) = Observable.fromCallable<Boolean> {
         var stringBufferForIds = StringBuffer()
         listOfRestaurants?.forEach { restaurant ->
             stringBufferForIds.append(restaurant.id)

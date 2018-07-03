@@ -3,6 +3,8 @@ package com.legalimpurity.zomatorestauranttracker.di.modules
 import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
+import com.legalimpurity.zomatorestauranttracker.data.DataManager
+import com.legalimpurity.zomatorestauranttracker.data.DataManagerImpl
 import com.legalimpurity.zomatorestauranttracker.data.local.db.AppDatabase
 import com.legalimpurity.zomatorestauranttracker.data.local.db.DatabaseHelper
 import com.legalimpurity.zomatorestauranttracker.data.local.db.DatabaseHelperImplementation
@@ -10,6 +12,8 @@ import com.legalimpurity.zomatorestauranttracker.data.remote.ApiDataHelper
 import com.legalimpurity.zomatorestauranttracker.data.remote.ApiDataHelperImpl
 import com.legalimpurity.zomatorestauranttracker.di.DatabaseInfo
 import com.legalimpurity.zomatorestauranttracker.util.DB_NAME
+import com.legalimpurity.zomatorestauranttracker.util.rx.SchedulerProvider
+import com.legalimpurity.zomatorestauranttracker.util.rx.SchedulerProviderImpl
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -25,7 +29,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideScheduleProvider(): SchedulerProvider = SchedulerProviderImplementation()
+    fun provideScheduleProvider(): SchedulerProvider = SchedulerProviderImpl()
 
     @Singleton
     @Provides

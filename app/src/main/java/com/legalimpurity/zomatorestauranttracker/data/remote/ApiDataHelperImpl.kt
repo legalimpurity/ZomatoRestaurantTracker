@@ -13,7 +13,7 @@ class ApiDataHelperImpl @Inject constructor(retrofit: Retrofit): ApiDataHelper
     init {
         retrofitService = retrofit.create(ZomatoApiService::class.java)
     }
-    override fun getGeocodeResponse(lat: Double, long: Double): Single<List<Restaurant?>> = retrofitService!!.getGeocodeResponse(lat,long)
+    override fun getRemoteGeocodeResponse(lat: Double, long: Double): Single<List<Restaurant?>> = retrofitService!!.getGeocodeResponse(lat,long)
             .map { geocodeApiResponse ->
                 geocodeApiResponse.nearbyRestaurants
             }
