@@ -9,9 +9,9 @@ import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaur
 @Dao
 interface RestaurantsDAO
 {
-    @Query("SELECT * FROM Restaurants")
-    fun loadAll(): List<Restaurant>
+    @Query("SELECT * FROM Restaurants where id IN (:listOfIds)")
+    fun loadRestaurantsWithIds(listOfIds : String): List<Restaurant>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(attTimeMix: List<Restaurant>)
+    fun insertAll(restaurants: List<Restaurant>)
 }

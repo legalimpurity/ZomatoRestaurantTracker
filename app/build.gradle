@@ -19,10 +19,14 @@ android {
     buildTypes {
         debug {
             buildConfigField 'String', 'ZomatoAPIKEY', ZomatoAPIKEY
+            buildConfigField 'String', 'BASE_URL', "https://developers.zomato.com"
+            buildConfigField 'String', 'DB_NAME', "Zomato.db"
         }
         release {
             minifyEnabled false
             buildConfigField 'String', 'ZomatoAPIKEY', ZomatoAPIKEY
+            buildConfigField 'String', 'BASE_URL', "https://developers.zomato.com"
+            buildConfigField 'String', 'DB_NAME', "Zomato.db"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
