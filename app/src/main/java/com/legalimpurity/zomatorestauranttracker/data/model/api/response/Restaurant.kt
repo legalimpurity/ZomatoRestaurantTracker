@@ -15,7 +15,7 @@ class Restaurant() : Parcelable {
     @PrimaryKey(autoGenerate = false)
     @NonNull
     @field:SerializedName("id")
-    var id: String = ""
+    var id: Long = 0
 
     @Expose
     @ColumnInfo(name = "featuredImage")
@@ -48,7 +48,7 @@ class Restaurant() : Parcelable {
     var photosUrl: String? = null
 
     constructor(parcel: Parcel) : this() {
-        id = parcel.readString()
+        id = parcel.readLong()
         featured_image = parcel.readString()
         thumb = parcel.readString()
         menuUrl = parcel.readString()
@@ -58,7 +58,7 @@ class Restaurant() : Parcelable {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
+        parcel.writeLong(id)
         parcel.writeString(featured_image)
         parcel.writeString(thumb)
         parcel.writeString(menuUrl)

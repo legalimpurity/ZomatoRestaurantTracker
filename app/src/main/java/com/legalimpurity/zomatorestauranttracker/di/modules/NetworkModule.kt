@@ -6,6 +6,8 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.legalimpurity.zomatorestauranttracker.BuildConfig
+import com.legalimpurity.zomatorestauranttracker.util.internetstateprovider.InternetStateProvider
+import com.legalimpurity.zomatorestauranttracker.util.internetstateprovider.InternetStateProviderImplementation
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -62,4 +64,9 @@ class NetworkModule {
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .build()
+
+    @Provides
+    @Singleton
+    fun provideInternetState(ctx: Context) : InternetStateProvider = InternetStateProviderImplementation(ctx)
+
 }

@@ -28,7 +28,7 @@ class MainViewModel(dataManager: DataManager, schedulerProvider: SchedulerProvid
         val latDouble = latitudeString.get()?.toDouble() ?: 0.0
         val lonDouble = longitudeString.get()?.toDouble() ?: 0.0
         getCompositeDisposable().add(
-                getDataManager().getRemoteAfterCachingGeocodeResponse(latDouble,lonDouble)
+                getDataManager().getFromRemoteAndCache(latDouble,lonDouble)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe({restaurantsList ->

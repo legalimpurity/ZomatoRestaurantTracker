@@ -43,6 +43,7 @@ ext {
 
     // Android Lifecycle Components
     AndroidArchVer = '1.1.1'
+    roomDatabase = '1.1.1'
 
     // Reactive Android
     rxJavaVersion = '2.1.0'
@@ -59,7 +60,9 @@ ext {
     // OkHttp
     okhttp = "3.4.1"
 
+    // Logging
     timberVersion = '4.6.0'
 
-    roomDatabase = '1.1.1'
+    // Database Debug
+    databaseDebug = '1.0.4'
 }
