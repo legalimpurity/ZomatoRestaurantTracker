@@ -24,7 +24,8 @@
             android:name=".ui.restaurantdetailscreen.RestaurantDetailActivity"
             android:label="@string/title_activity_restaurant_detail"
             android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.mainview.MainActivity" />
     </application>
 
 </manifest>

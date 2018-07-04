@@ -36,6 +36,7 @@ class RestaurantDetailFragmentModel(dataManager: DataManager, schedulerProvider:
                         },
                                 { throwable ->
                                     AppLogger.d(throwable.localizedMessage)
+                                    getNavigator()?.apiError(throwable)
                                 }
                         )
         )

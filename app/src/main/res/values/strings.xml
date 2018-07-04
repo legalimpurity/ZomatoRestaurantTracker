@@ -7,4 +7,12 @@
     <string name="action_photos_url">Photos url</string>
     <string name="action_menu_url">Menu Url</string>
     <string name="action_events_url">Events Url</string>
+
+    <string name="error_latitude">Please fill in a latitude.</string>
+    <string name="error_longitude">Please fill in a longitude.</string>
+    <string name="error_longitude_format">Please fill in a longitude in correct format.</string>
+    <string name="error_latitude_format">Please fill in a latitude in correct format.</string>
+
+
+    <string name="generic_error">Some error occurred, please try in a while.</string>
 </resources>

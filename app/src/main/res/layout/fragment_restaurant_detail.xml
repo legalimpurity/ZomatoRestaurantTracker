@@ -11,14 +11,11 @@
             name="viewModel"
             type="com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment.RestaurantDetailFragmentModel"/>
     </data>
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/padding_normal"
-        android:layout_marginEnd="@dimen/padding_normal"
-        android:layout_marginStart="@dimen/padding_normal"
-        android:layout_marginTop="@dimen/padding_normal">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ivResturantFeatureImage"
@@ -33,7 +30,8 @@
             android:text="@{viewModel.titleString}"
             tools:text="Restaurant Title"
             app:layout_constraintTop_toBottomOf="@+id/ivResturantFeatureImage"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:padding="@dimen/spacing_normal"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvRestaurantsReviews"
@@ -41,5 +39,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
             app:adapter="@{viewModel.restaurantReviewsObservableArrayList}"/>
-    </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
 </layout>

@@ -32,5 +32,5 @@ fun reviewsAdapterBinding(recyclerView: RecyclerView,
 @BindingAdapter("imageUrl")
 fun loadImage(imageView: ImageView, url: String) {
     if(!TextUtils.isEmpty(url))
-        ImageLoadingUtil().ImageLoadingWrapper(imageView.context,url,imageView, R.drawable.ic_launcher_background)
+        ImageLoadingUtil().ImageLoadingWrapper(imageView.context,url,imageView, R.drawable.ic_zomato)
 }

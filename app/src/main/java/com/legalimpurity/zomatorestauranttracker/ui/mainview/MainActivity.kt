@@ -8,6 +8,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import com.android.databinding.library.baseAdapters.BR
 import com.legalimpurity.zomatorestauranttracker.R
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
@@ -27,7 +28,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainAct
     private var mMainViewModel: MainViewModel? = null
 
     private var mActivityMainBinding: ActivityMainBinding? = null
-
 
     @Inject
     lateinit var mLayoutManager : RecyclerView.LayoutManager
@@ -92,6 +92,41 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainAct
     // Navigator Functions
 
     override fun apiError(throwable: Throwable) {
+        showMsg(throwable.localizedMessage,-1,null)
+    }
+
+    override fun checkLatLongValidation()
+    {
+        val latRegex = Regex("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?)")
+        val lonRegex = Regex("\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)")
+
+        hideKeyboard()
+
+        //validate latitude and longitude
+        var returner = true
+        if (TextUtils.isEmpty(mActivityMainBinding?.etLatitude?.text.toString())) {
+            mActivityMainBinding?.etLatitude?.error = getString(R.string.error_latitude)
+            returner = false
+        }
+
+        if (TextUtils.isEmpty(mActivityMainBinding?.etLongitude?.text)) {
+            mActivityMainBinding?.etLongitude?.error = getString(R.string.error_longitude)
+            returner = false
+        }
+
+        if (!mActivityMainBinding?.etLongitude?.text!!.matches(lonRegex)) {
+            mActivityMainBinding?.etLongitude?.error = getString(R.string.error_longitude_format)
+            returner = false
+        }
+
+        if (!mActivityMainBinding?.etLatitude?.text!!.matches(latRegex)) {
+            mActivityMainBinding?.etLatitude?.error = getString(R.string.error_latitude_format)
+            returner = false
+        }
+
+        if(returner)
+            mMainViewModel?.loadRestaurantsForCoordinates()
+
     }
 
 }

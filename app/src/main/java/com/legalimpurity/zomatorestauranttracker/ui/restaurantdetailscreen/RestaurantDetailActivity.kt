@@ -65,6 +65,7 @@ class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, R
 
         setSupportActionBar(toolbar)
         loadObj()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun loadObj()
@@ -144,7 +145,11 @@ class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, R
     override fun getCoordinatorRootLayout() = mActivityRestaurantDetailBinding?.rootCoordinator
 
     override fun apiError(throwable: Throwable) {
+        if(mInternetStateProvider.isOnline())
 
+        else {
+            showMsg(throwable.localizedMessage, -1, null)
+        }
     }
 
 }

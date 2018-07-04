@@ -3,6 +3,7 @@ package com.legalimpurity.zomatorestauranttracker.util
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.legalimpurity.zomatorestauranttracker.R
 
 class ImageLoadingUtil
 {
@@ -15,6 +16,7 @@ class ImageLoadingUtil
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .placeholder(placeholderResource)
+                    .error(R.mipmap.no_image_available)
                     .into(it)
         }
     }

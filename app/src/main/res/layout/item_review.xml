@@ -7,7 +7,7 @@
             name="viewModel"
             type="com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment.restaurantdetailfragmentadapter.RestaurantsReviewItemViewModel" />
     </data>
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -17,35 +17,38 @@
             android:id="@+id/ivReviewerImage"
             android:layout_width="@dimen/thumbnail_width_height"
             android:layout_height="@dimen/thumbnail_width_height"
-            app:imageUrl="@{viewModel.reviewrImageUrl}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvReviewerRatingText"/>
+            app:imageUrl="@{viewModel.reviewrImageUrl}"/>
 
-        <TextView
-            android:id="@+id/tvReviewerName"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="@{viewModel.reviewerName}"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-            app:layout_constraintBottom_toTopOf="@+id/tvReviewerRatingText"
-            app:layout_constraintStart_toEndOf="@+id/ivReviewerImage"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="Reviewer Name" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical|left">
 
-        <TextView
-            android:id="@+id/tvReviewerRatingText"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_marginBottom="8dp"
-            android:maxLines="3"
-            android:text="@{viewModel.reviewtext}"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            app:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
-            app:layout_constraintBottom_toBottomOf="@+id/ivReviewerImage"
-            app:layout_constraintStart_toEndOf="@+id/ivReviewerImage"
-            tools:layout_editor_absoluteX="0dp"
-            tools:text="Review Text is so long , it is a long text.Review Text is so long , it is a long text." />
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvReviewerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@{viewModel.reviewerName}"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                app:layout_constraintBottom_toTopOf="@+id/tvReviewerRatingText"
+                app:layout_constraintStart_toEndOf="@+id/ivReviewerImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Reviewer Name"
+                android:padding="@dimen/spacing_normal"/>
+
+            <TextView
+                android:id="@+id/tvReviewerRatingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="@{viewModel.reviewtext}"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                android:padding="@dimen/spacing_normal"
+                tools:text="Review Text is so long , it is a long text.Review Text is so long , it is a long text."/>
+        </LinearLayout>
+
+    </LinearLayout>
 </layout>

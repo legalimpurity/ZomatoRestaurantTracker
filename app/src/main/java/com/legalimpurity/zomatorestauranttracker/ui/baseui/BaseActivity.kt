@@ -11,12 +11,17 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.legalimpurity.zomatorestauranttracker.util.internetstateprovider.InternetStateProvider
 import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<out BaseNavigator>>: AppCompatActivity(), BaseFragment.Callbacks {
 
     private lateinit var mViewDataBinding: T
     private lateinit var mViewModel: V
+
+    @Inject
+    lateinit var mInternetStateProvider: InternetStateProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)

@@ -23,8 +23,14 @@ class MainViewModel(dataManager: DataManager, schedulerProvider: SchedulerProvid
         longitudeString.set("28.568139")
     }
 
+    fun goButtonClicked()
+    {
+        getNavigator()?.checkLatLongValidation()
+    }
+
     fun loadRestaurantsForCoordinates()
     {
+        setIsLoading(true)
         val latDouble = latitudeString.get()?.toDouble() ?: 0.0
         val lonDouble = longitudeString.get()?.toDouble() ?: 0.0
         getCompositeDisposable().add(
@@ -33,12 +39,14 @@ class MainViewModel(dataManager: DataManager, schedulerProvider: SchedulerProvid
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe({restaurantsList ->
                             restaurantItemsLiveData.value = restaurantsList
+                            setIsLoading(false)
                         },
-                                { throwable ->
-                                    AppLogger.d(throwable.localizedMessage)
-                                }
+                        { throwable ->
+                            AppLogger.d(throwable.localizedMessage)
+                            getNavigator()?.apiError(throwable)
+                            setIsLoading(false)
+                        }
                         )
         )
     }
-
 }

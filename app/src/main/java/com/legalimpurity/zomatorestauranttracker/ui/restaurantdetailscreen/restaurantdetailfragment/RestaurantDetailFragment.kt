@@ -12,6 +12,7 @@ import com.legalimpurity.zomatorestauranttracker.R
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Review
 import com.legalimpurity.zomatorestauranttracker.databinding.FragmentRestaurantDetailBinding
+import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseActivity
 import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseFragment
 import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.RestaurantDetailActivity
 import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment.restaurantdetailfragmentadapter.RestaurantsReviewsAdapter
@@ -90,6 +91,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
     override fun getLayoutId(): Int = R.layout.fragment_restaurant_detail
 
     override fun apiError(throwable: Throwable) {
+        (activity as BaseActivity<*,*>).showMsg(throwable.localizedMessage,-1,null)
     }
 
     override fun onDestroy() {

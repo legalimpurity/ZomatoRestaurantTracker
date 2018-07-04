@@ -68,4 +68,10 @@ ext {
 
     // Glide Version
     glide = '4.5.0'
+
+    // Testing
+    junitVersion = '4.12'
+    mockitoVersion = '2.15.0'
+    mockitoKotVersion = '1.5.0'
+
 }
