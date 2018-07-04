@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment.restaurantdetailfragmentadapter.RestaurantsReviewItemViewModel" />
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/restaurantItemRootView">
+
+        <ImageView
+            android:id="@+id/ivReviewerImage"
+            android:layout_width="@dimen/thumbnail_width_height"
+            android:layout_height="@dimen/thumbnail_width_height"
+            app:imageUrl="@{viewModel.reviewrImageUrl}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvReviewerRatingText"/>
+
+        <TextView
+            android:id="@+id/tvReviewerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@{viewModel.reviewerName}"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+            app:layout_constraintBottom_toTopOf="@+id/tvReviewerRatingText"
+            app:layout_constraintStart_toEndOf="@+id/ivReviewerImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Reviewer Name" />
+
+        <TextView
+            android:id="@+id/tvReviewerRatingText"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginBottom="8dp"
+            android:maxLines="3"
+            android:text="@{viewModel.reviewtext}"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            app:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
+            app:layout_constraintBottom_toBottomOf="@+id/ivReviewerImage"
+            app:layout_constraintStart_toEndOf="@+id/ivReviewerImage"
+            tools:layout_editor_absoluteX="0dp"
+            tools:text="Review Text is so long , it is a long text.Review Text is so long , it is a long text." />
+    </android.support.constraint.ConstraintLayout>
+</layout>

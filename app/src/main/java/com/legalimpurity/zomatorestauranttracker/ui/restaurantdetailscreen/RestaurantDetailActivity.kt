@@ -95,20 +95,22 @@ class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, R
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        if (id == R.id.action_photos_url) {
-            restaurantsList?.get(container.currentItem)?.photosUrl?.let { openBrowser(it) }
-            return true
-        }
-        else if (id == R.id.action_events_url) {
-            restaurantsList?.get(container.currentItem)?.eventsUrl?.let { openBrowser(it) }
-            return true
-        }
-        else if (id == R.id.action_menu_url) {
-            restaurantsList?.get(container.currentItem)?.menuUrl?.let { openBrowser(it) }
-            return true
+        return when (id) {
+            R.id.action_photos_url -> {
+                restaurantsList?.get(container.currentItem)?.photosUrl?.let { openBrowser(it) }
+                true
+            }
+            R.id.action_events_url -> {
+                restaurantsList?.get(container.currentItem)?.eventsUrl?.let { openBrowser(it) }
+                true
+            }
+            R.id.action_menu_url -> {
+                restaurantsList?.get(container.currentItem)?.menuUrl?.let { openBrowser(it) }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
 
-        return super.onOptionsItemSelected(item)
     }
 
     private fun openBrowser(url: String)

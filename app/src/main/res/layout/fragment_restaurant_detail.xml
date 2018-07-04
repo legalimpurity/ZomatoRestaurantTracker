@@ -27,6 +27,7 @@
             app:imageUrl="@{viewModel.imageUrlString}"/>
 
         <TextView
+            android:id="@+id/tvReviewerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{viewModel.titleString}"
@@ -34,5 +35,11 @@
             app:layout_constraintTop_toBottomOf="@+id/ivResturantFeatureImage"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvRestaurantsReviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
+            app:adapter="@{viewModel.restaurantReviewsObservableArrayList}"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

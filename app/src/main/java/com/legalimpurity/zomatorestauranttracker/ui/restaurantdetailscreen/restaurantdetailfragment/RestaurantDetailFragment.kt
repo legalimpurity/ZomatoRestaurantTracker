@@ -1,15 +1,20 @@
 package com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.android.databinding.library.baseAdapters.BR
 import android.view.View
 import com.legalimpurity.zomatorestauranttracker.R
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
+import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Review
 import com.legalimpurity.zomatorestauranttracker.databinding.FragmentRestaurantDetailBinding
 import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseFragment
 import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.RestaurantDetailActivity
+import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment.restaurantdetailfragmentadapter.RestaurantsReviewsAdapter
 import kotlinx.android.synthetic.main.fragment_restaurant_detail.view.*
 import javax.inject.Inject
 
@@ -18,28 +23,34 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
 
-//    @Inject
-//    lateinit var mAttTimeMixManager : RecyclerView.LayoutManager
+    @Inject
+    lateinit var mLayoutManager : RecyclerView.LayoutManager
 
-//    @Inject
-//    lateinit var mItemAnimator : RecyclerView.ItemAnimator
+    @Inject
+    lateinit var mItemAnimator : RecyclerView.ItemAnimator
 
-//    @Inject
-//    lateinit var mTimeTableAdapter: TimeTableAdapter
+    @Inject
+    lateinit var mItemDecorator : RecyclerView.ItemDecoration
 
-//    @Inject
-//    lateinit var mItemDecorator : RecyclerView.ItemDecoration
+    @Inject
+    lateinit var mRestaurantsReviewsAdapter: RestaurantsReviewsAdapter
 
     private var mRestaurantDetailFragmentModel: RestaurantDetailFragmentModel? = null
     private var mFragmentRestaurantDetailBinding: FragmentRestaurantDetailBinding? = null
 
     private var restaurant:Restaurant? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mRestaurantDetailFragmentModel?.setNavigator(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mFragmentRestaurantDetailBinding = getViewDataBinding()
-        mRestaurantDetailFragmentModel?.setNavigator(this)
         loadObj(arguments)
+        setUpRestaurantAdapter()
+        subscribeToLiveData()
     }
 
     private fun loadObj(bundle: Bundle?) {
@@ -50,6 +61,24 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
             mRestaurantDetailFragmentModel?.restaurantId?.set(it.id)
             mRestaurantDetailFragmentModel?.loadReviewsForRestaurant()
         }
+    }
+
+    private fun setUpRestaurantAdapter()
+    {
+            mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+            mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.itemAnimator = mItemAnimator
+            mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.addItemDecoration(mItemDecorator)
+            mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.adapter = mRestaurantsReviewsAdapter
+    }
+
+    private fun subscribeToLiveData()
+    {
+        mRestaurantDetailFragmentModel?.restaurantReviewsLiveData?.observe(this, Observer<List<Review?>> {
+            restaurantObjs -> restaurantObjs?.let{
+            mRestaurantDetailFragmentModel?.restaurantReviewsObservableArrayList?.clear()
+            mRestaurantDetailFragmentModel?.restaurantReviewsObservableArrayList?.addAll(it)
+            }
+        })
     }
 
     //Functions to be implemented by every Fragment
@@ -66,6 +95,11 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
     override fun apiError(throwable: Throwable) {
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.layoutManager != null)
+            mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.layoutManager = null
+    }
 //    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 //                              savedInstanceState: Bundle?): View? {
 //        val rootView = inflater.inflate(R.layout.fragment_restaurant_detail, container, false)

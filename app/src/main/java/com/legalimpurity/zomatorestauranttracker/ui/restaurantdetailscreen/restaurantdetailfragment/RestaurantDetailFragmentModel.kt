@@ -1,7 +1,10 @@
 package com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment
 
+import android.arch.lifecycle.MutableLiveData
+import android.databinding.ObservableArrayList
 import android.databinding.ObservableField
 import com.legalimpurity.zomatorestauranttracker.data.DataManager
+import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Review
 import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseViewModel
 import com.legalimpurity.zomatorestauranttracker.util.AppLogger
 import com.legalimpurity.zomatorestauranttracker.util.rx.SchedulerProvider
@@ -12,6 +15,9 @@ class RestaurantDetailFragmentModel(dataManager: DataManager, schedulerProvider:
     var titleString = ObservableField<String>()
     var imageUrlString = ObservableField<String>()
     var restaurantId = ObservableField<Long>()
+
+    val restaurantReviewsObservableArrayList = ObservableArrayList<Review?>()
+    val restaurantReviewsLiveData: MutableLiveData<List<Review?>> = MutableLiveData()
 
     init {
         titleString.set("")
@@ -26,7 +32,7 @@ class RestaurantDetailFragmentModel(dataManager: DataManager, schedulerProvider:
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe({ reviewsList ->
-                            AppLogger.d(reviewsList.toString())
+                            restaurantReviewsLiveData.value = reviewsList
                         },
                                 { throwable ->
                                     AppLogger.d(throwable.localizedMessage)
