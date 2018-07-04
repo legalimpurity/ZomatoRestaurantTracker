@@ -1,0 +1,7 @@
+package com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment
+
+import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseNavigator
+
+interface RestaurantDetailFragmentNavigator : BaseNavigator
+{
+}

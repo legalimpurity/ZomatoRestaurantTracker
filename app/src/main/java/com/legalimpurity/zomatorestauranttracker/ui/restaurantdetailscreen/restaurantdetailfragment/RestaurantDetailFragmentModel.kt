@@ -1,0 +1,9 @@
+package com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment
+
+import com.legalimpurity.zomatorestauranttracker.data.DataManager
+import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseViewModel
+import com.legalimpurity.zomatorestauranttracker.util.rx.SchedulerProvider
+import io.reactivex.disposables.CompositeDisposable
+
+class RestaurantDetailFragmentModel(dataManager: DataManager, schedulerProvider: SchedulerProvider, compositeDisposable: CompositeDisposable) : BaseViewModel<RestaurantDetailFragmentNavigator>(dataManager,schedulerProvider, compositeDisposable) {
+}

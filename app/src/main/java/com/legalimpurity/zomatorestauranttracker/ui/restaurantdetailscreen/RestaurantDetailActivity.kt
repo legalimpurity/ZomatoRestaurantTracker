@@ -1,6 +1,5 @@
 package com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen
 
-import android.app.Activity
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -11,24 +10,24 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import com.android.databinding.library.baseAdapters.BR
 
 import com.legalimpurity.zomatorestauranttracker.R
 import com.legalimpurity.zomatorestauranttracker.databinding.ActivityRestaurantDetailBinding
 import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseActivity
 import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.restaurantdetailfragment.RestaurantDetailFragment
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_restaurant_detail.*
 import javax.inject.Inject
 
-class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, RestaurantDetailModel>(), RestaurantDetailNavigator {
+class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, RestaurantDetailModel>(), RestaurantDetailNavigator, HasSupportFragmentInjector {
 
     companion object {
-//        private val ARG_SECTION_NUMBER = "section_number"
+        private val ARG_SECTION_NUMBER = "section_number"
         fun launchRestaurantDetailActivity(activity: AppCompatActivity) {
             val intent = Intent()
             intent.setClass(activity, RestaurantDetailActivity::class.java)
@@ -38,6 +37,9 @@ class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, R
 
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     private var mRestaurantDetailModel: RestaurantDetailModel? = null
 
@@ -62,6 +64,8 @@ class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, R
         }
 
     }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

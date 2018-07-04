@@ -13,7 +13,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import dagger.android.AndroidInjection
 
-abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<out BaseNavigator>>: AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<out BaseNavigator>>: AppCompatActivity(), BaseFragment.Callbacks {
 
     private lateinit var mViewDataBinding: T
     private lateinit var mViewModel: V
@@ -49,6 +49,13 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<out BaseNavig
     @LayoutRes
     abstract fun getLayoutId(): Int
     abstract fun getCoordinatorRootLayout(): CoordinatorLayout?
+
+    // Fragment Functions
+    override fun onFragmentAttached() {
+    }
+
+    override fun onFragmentDetached(tag: String) {
+    }
 
     fun hideKeyboard() {
         val view = this.currentFocus
