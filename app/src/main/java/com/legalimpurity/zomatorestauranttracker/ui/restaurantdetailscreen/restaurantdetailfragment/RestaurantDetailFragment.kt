@@ -91,7 +91,12 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
     override fun getLayoutId(): Int = R.layout.fragment_restaurant_detail
 
     override fun apiError(throwable: Throwable) {
-        (activity as BaseActivity<*,*>).showMsg(throwable.localizedMessage,-1,null)
+        var msgId = 0
+        msgId = if(throwable.localizedMessage.equals("Callable returned null") && !(activity as BaseActivity<*,*>).mInternetStateProvider.isOnline())
+            R.string.no_internet_cache_error
+        else
+            R.string.generic_error
+        (activity as BaseActivity<*,*>).showMsg(msgId,-1,null)
     }
 
     override fun onDestroy() {
@@ -99,12 +104,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
         if (mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.layoutManager != null)
             mFragmentRestaurantDetailBinding?.rvRestaurantsReviews?.layoutManager = null
     }
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-//                              savedInstanceState: Bundle?): View? {
-//        val rootView = inflater.inflate(R.layout.fragment_restaurant_detail, container, false)
-//
-//        return rootView
-//    }
 
     companion object {
         private val ARG_RESTAURANT_OBJ = "ARG_RESTAURANT_OBJ"

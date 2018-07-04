@@ -18,11 +18,6 @@ class MainViewModel(dataManager: DataManager, schedulerProvider: SchedulerProvid
     val restaurantItemsObservableArrayList = ObservableArrayList<Restaurant?>()
     val restaurantItemsLiveData: MutableLiveData<List<Restaurant?>> = MutableLiveData()
 
-    init {
-        latitudeString.set("77.325816")
-        longitudeString.set("28.568139")
-    }
-
     fun goButtonClicked()
     {
         getNavigator()?.checkLatLongValidation()

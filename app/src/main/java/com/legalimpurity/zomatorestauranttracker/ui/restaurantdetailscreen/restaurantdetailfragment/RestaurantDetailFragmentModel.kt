@@ -16,6 +16,7 @@ class RestaurantDetailFragmentModel(dataManager: DataManager, schedulerProvider:
     var imageUrlString = ObservableField<String>()
     var restaurantId = ObservableField<Long>()
 
+
     val restaurantReviewsObservableArrayList = ObservableArrayList<Review?>()
     val restaurantReviewsLiveData: MutableLiveData<List<Review?>> = MutableLiveData()
 
@@ -23,6 +24,7 @@ class RestaurantDetailFragmentModel(dataManager: DataManager, schedulerProvider:
         titleString.set("")
         imageUrlString.set("")
         restaurantId.set(0)
+        restaurantReviewsObservableArrayList
     }
 
     fun loadReviewsForRestaurant()

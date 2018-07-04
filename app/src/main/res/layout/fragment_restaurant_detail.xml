@@ -33,12 +33,23 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:padding="@dimen/spacing_normal"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvRestaurantsReviews"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
-            app:adapter="@{viewModel.restaurantReviewsObservableArrayList}"/>
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvRestaurantsReviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
+                app:adapter="@{viewModel.restaurantReviewsObservableArrayList}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/restaurant_has_no_reviews"
+                android:visibility="@{(viewModel.restaurantReviewsObservableArrayList.size == 0) ? View.VISIBLE : View.GONE}"
+                android:padding="@dimen/spacing_large"/>
+        </FrameLayout>
 
     </LinearLayout>
 </layout>
