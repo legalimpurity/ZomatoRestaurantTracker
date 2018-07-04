@@ -37,10 +37,10 @@
                 android:text="@={viewModel.longitudeString}"
                 app:layout_constraintStart_toEndOf="@+id/etLatitude"/>
 
-            <Button
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/get_restaurants"
+                android:src="@drawable/ic_arrow_forward_black_24dp"
                 android:onClick="@{() -> viewModel.loadRestaurantsForCoordinates()}"
                 app:layout_constraintStart_toEndOf="@+id/etLongitude"/>
 

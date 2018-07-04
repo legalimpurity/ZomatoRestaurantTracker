@@ -8,12 +8,27 @@
             type="com.legalimpurity.zomatorestauranttracker.ui.mainview.mainviewadapter.RestaurantItemViewModel" />
     </data>
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ivRestaurantItemImage"
+            android:layout_width="@dimen/thumbnail_width_height"
+            android:layout_height="@dimen/thumbnail_width_height"
+            app:imageUrl="@{viewModel.imageUrl}"
+            app:layout_constraintStart_toStartOf="parent"/>
         <TextView
+            android:id="@+id/tvRestaurantTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Dhabe Wala"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:maxLines="3"
+            tools:text="Restaurant Name"
+            app:layout_constraintStart_toEndOf="@+id/ivRestaurantItemImage"
+            app:layout_constraintEnd_toEndOf="parent"
             android:text="@{viewModel.title}"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

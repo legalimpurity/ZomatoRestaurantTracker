@@ -65,4 +65,7 @@ ext {
 
     // Database Debug
     databaseDebug = '1.0.4'
+
+    // Glide Version
+    glide = '4.5.0'
 }
