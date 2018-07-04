@@ -1,27 +1,39 @@
 package com.legalimpurity.zomatorestauranttracker.data.model.api.response
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-data class User(
-
-	@field:SerializedName("profile_deeplink")
-	val profileDeeplink: String? = null,
-
-	@field:SerializedName("profile_image")
-	val profileImage: String? = null,
-
-	@field:SerializedName("profile_url")
-	val profileUrl: String? = null,
-
-	@field:SerializedName("foodie_color")
-	val foodieColor: String? = null,
+class User() : Parcelable{
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	var name: String? = null
 
-	@field:SerializedName("foodie_level_num")
-	val foodieLevelNum: Int? = null,
+    @field:SerializedName("profile_image")
+    var profileImage: String? = null
 
-	@field:SerializedName("foodie_level")
-	val foodieLevel: String? = null
-)
+    constructor(parcel: Parcel) : this() {
+        name = parcel.readString()
+        profileImage = parcel.readString()
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(profileImage)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<User> {
+        override fun createFromParcel(parcel: Parcel): User {
+            return User(parcel)
+        }
+
+        override fun newArray(size: Int): Array<User?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+}

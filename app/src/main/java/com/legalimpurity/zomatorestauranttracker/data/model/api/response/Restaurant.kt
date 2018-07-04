@@ -17,6 +17,7 @@ class Restaurant() : Parcelable {
     @field:SerializedName("id")
     var id: Long = 0
 
+
     @Expose
     @ColumnInfo(name = "featuredImage")
     @field:SerializedName("featured_image")

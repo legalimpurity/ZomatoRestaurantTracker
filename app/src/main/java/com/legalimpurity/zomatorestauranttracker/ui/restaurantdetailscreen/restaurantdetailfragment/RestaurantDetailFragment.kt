@@ -24,9 +24,6 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
     lateinit var mViewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var mLayoutManager : RecyclerView.LayoutManager
-
-    @Inject
     lateinit var mItemAnimator : RecyclerView.ItemAnimator
 
     @Inject

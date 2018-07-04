@@ -28,7 +28,7 @@ class ApiDataHelperImpl @Inject constructor(retrofit: Retrofit): ApiDataHelper
             }
             .toList()
 
-    override fun getReviewsResponse(resId: String): Single<List<Review?>?> = retrofitService!!.getReviewsResponse(resId)
+    override fun getReviewsResponse(resId: Long): Single<List<Review?>?> = retrofitService!!.getReviewsResponse(resId.toString())
             .map { reviewApiResponse ->
                 reviewApiResponse.userReviews
             }

@@ -1,6 +1,7 @@
 package com.legalimpurity.zomatorestauranttracker.data.local.db
 
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
+import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Review
 import com.legalimpurity.zomatorestauranttracker.data.model.db.NearbyRestaurantRecord
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -37,4 +38,10 @@ class DatabaseHelperImplementation @Inject constructor(private val mAppDatabase:
         mAppDatabase.restaurantsDAO().insertAll(listOfRestaurants)
         true
     }
+
+    override fun addOrUpdateReviews(listOfReviews: List<Review?>?) = Observable.fromCallable {
+        mAppDatabase.reviewsDAO().insertAll(listOfReviews)
+        true
+    }
+
 }

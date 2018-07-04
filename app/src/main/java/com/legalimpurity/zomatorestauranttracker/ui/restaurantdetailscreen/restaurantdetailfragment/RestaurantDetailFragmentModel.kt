@@ -28,7 +28,7 @@ class RestaurantDetailFragmentModel(dataManager: DataManager, schedulerProvider:
     fun loadReviewsForRestaurant()
     {
         getCompositeDisposable().add(
-                getDataManager().getReviewsResponse(restaurantId.get().toString())
+                getDataManager().getRestaurantsReviewsDataFromRemoteAfterCachingResponses(restaurantId.get() ?: 0)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe({ reviewsList ->

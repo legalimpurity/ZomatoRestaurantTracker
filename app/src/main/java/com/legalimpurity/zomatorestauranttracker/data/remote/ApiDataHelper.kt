@@ -7,5 +7,5 @@ import io.reactivex.Single
 
 interface ApiDataHelper {
     fun getRemoteGeocodeResponse(lat: Double, lon: Double): Single<List<Restaurant?>>
-    fun getReviewsResponse(resId: String): Single<List<Review?>?>
+    fun getReviewsResponse(resId: Long): Single<List<Review?>?>
 }
