@@ -145,11 +145,10 @@ class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, R
     override fun getCoordinatorRootLayout() = mActivityRestaurantDetailBinding?.rootCoordinator
 
     override fun apiError(throwable: Throwable) {
-        if(mInternetStateProvider.isOnline())
-
-        else {
-            showMsg(throwable.localizedMessage, -1, null)
-        }
+        if(throwable.localizedMessage.equals("Callable returned null") && !mInternetStateProvider.isOnline())
+            showMsg(R.string.no_internet_cache_error,-1,null)
+        else
+            showMsg(R.string.generic_error,-1,null)
     }
 
 }

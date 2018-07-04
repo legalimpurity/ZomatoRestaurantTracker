@@ -92,7 +92,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainAct
     // Navigator Functions
 
     override fun apiError(throwable: Throwable) {
-        showMsg(throwable.localizedMessage,-1,null)
+        if(throwable.localizedMessage.equals("Callable returned null") && !mInternetStateProvider.isOnline())
+            showMsg(R.string.no_internet_cache_error,-1,null)
+        else
+            showMsg(R.string.generic_error,-1,null)
     }
 
     override fun checkLatLongValidation()

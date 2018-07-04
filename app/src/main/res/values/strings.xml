@@ -15,4 +15,6 @@
 
 
     <string name="generic_error">Some error occurred, please try in a while.</string>
+    <string name="no_internet_cache_error">Please make sure you are connected to the internet to download data for new location.</string>
+    <string name="restaurant_has_no_reviews">Either you are not connected to the internet and the reviews are not cached or the restaurant has no reviews.</string>
 </resources>
