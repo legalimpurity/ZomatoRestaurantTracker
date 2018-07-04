@@ -45,6 +45,12 @@ ZomatoAPIKEY="YOUR_ZOMATE_API_KEY_GOES_HERE"
 - **ui**: View classes along with their corresponding ViewModel.
 - **utils**: Utility classes.
 
+#### Database Structure:
+- **Coordinates and list of ids**: Keeps ids of restaurants and co-ordinates.
+- **Restaurants**: List of Restaurants and their ids.
+- **Reviews**: Reviews of users on Restaurants.
+- **Users**: TODO : User information is being saved right now in the Reviews table only, because of lack of time. We could create another User table and keep userids inside Reviews table, that way we can reduce the data footprint of the app.
+
 #### Classes have been designed in such a way that it could be inherited and maximize the code reuse.
 
 ### Contributing to ZomatoRestaurantTracker
