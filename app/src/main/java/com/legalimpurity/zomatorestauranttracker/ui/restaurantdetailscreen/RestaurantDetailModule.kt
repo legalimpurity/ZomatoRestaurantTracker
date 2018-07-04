@@ -17,16 +17,4 @@ class RestaurantDetailModule
     @Provides
     fun provideRestaurantDetailModelFactory(restaurantDetailModel: RestaurantDetailModel) : ViewModelProvider.Factory = ViewModelProviderFactory<RestaurantDetailModel>(restaurantDetailModel)
 
-//    @Provides
-//    fun provideRestaurantsSectionsPagerAdapter() = RestaurantsAdapter()
-//
-//    @Provides
-//    fun provideRestaurantsRecyclerLayoutManager(ctx: Context) : RecyclerView.LayoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL,false)
-//
-//    @Provides
-//    fun provideRestaurantsRecyclerItemAnimator(): RecyclerView.ItemAnimator = DefaultItemAnimator()
-//
-//    @Provides
-//    fun provideRestaurantsRecyclerItemDecoration(ctx: Context): RecyclerView.ItemDecoration = DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL)
-
 }

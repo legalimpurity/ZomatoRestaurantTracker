@@ -54,8 +54,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainAct
     private fun setUpRestaurantAdapter()
     {
         mRestaurantsAdapterListener = object : RestaurantsAdapterListener {
-            override fun onClick(restaurant: Restaurant, context : Context) {
-                RestaurantDetailActivity.launchRestaurantDetailActivity(context as AppCompatActivity)
+            override fun onClick(restaurantItemPos: Int, context : Context) {
+                RestaurantDetailActivity.launchRestaurantDetailActivity(context as AppCompatActivity,mMainViewModel?.restaurantItemsLiveData?.value,restaurantItemPos)
             }
         }
 
@@ -79,7 +79,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainAct
 
     // Functions to be implemented by every Activity
     override fun getViewModel(): MainViewModel {
-        mMainViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainViewModel::class.java!!)
+        mMainViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainViewModel::class.java)
         return mMainViewModel as MainViewModel
     }
 

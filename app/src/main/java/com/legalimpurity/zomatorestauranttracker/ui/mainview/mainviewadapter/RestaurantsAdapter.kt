@@ -20,7 +20,7 @@ class RestaurantsAdapter: RecyclerView.Adapter<BaseRecyclerViewHolder>()
         val mItemRestaurantBinding: ItemRestaurantBinding = ItemRestaurantBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         val resViewHolder = RestaurantItemViewHolder(mItemRestaurantBinding)
         mItemRestaurantBinding.restaurantItemRootView.setOnClickListener{view ->
-            restaurantsAdapterListener?.onClick(restaurantObjs[resViewHolder.adapterPosition],view.context)
+            restaurantsAdapterListener?.onClick(resViewHolder.adapterPosition,view.context)
         }
         return resViewHolder
     }

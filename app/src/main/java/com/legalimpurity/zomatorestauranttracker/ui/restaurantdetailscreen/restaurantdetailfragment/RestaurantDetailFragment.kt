@@ -6,8 +6,10 @@ import android.os.Bundle
 import com.android.databinding.library.baseAdapters.BR
 import android.view.View
 import com.legalimpurity.zomatorestauranttracker.R
+import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
 import com.legalimpurity.zomatorestauranttracker.databinding.FragmentRestaurantDetailBinding
 import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseFragment
+import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.RestaurantDetailActivity
 import kotlinx.android.synthetic.main.fragment_restaurant_detail.view.*
 import javax.inject.Inject
 
@@ -31,11 +33,20 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
     private var mRestaurantDetailFragmentModel: RestaurantDetailFragmentModel? = null
     private var mFragmentRestaurantDetailBinding: FragmentRestaurantDetailBinding? = null
 
+    private var restaurant:Restaurant? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mFragmentRestaurantDetailBinding = getViewDataBinding()
         mRestaurantDetailFragmentModel?.setNavigator(this)
-        view.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
+        loadObj(arguments)
+    }
+
+    private fun loadObj(bundle: Bundle?) {
+        restaurant = bundle?.getParcelable(ARG_RESTAURANT_OBJ)
+        restaurant?.let {
+            view?.section_label?.text = it.name
+        }
     }
 
     //Functions to be implemented by every Fragment
@@ -60,11 +71,11 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
 //    }
 
     companion object {
-        private val ARG_SECTION_NUMBER = "section_number"
-        fun newInstance(sectionNumber: Int): RestaurantDetailFragment {
+        private val ARG_RESTAURANT_OBJ = "ARG_RESTAURANT_OBJ"
+        fun newInstance(restaurant: Restaurant?): RestaurantDetailFragment {
             val fragment = RestaurantDetailFragment()
             val args = Bundle()
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+            args.putParcelable(ARG_RESTAURANT_OBJ, restaurant)
             fragment.arguments = args
             return fragment
         }

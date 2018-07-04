@@ -5,5 +5,5 @@ import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaur
 
 interface RestaurantsAdapterListener
 {
-    fun onClick(restaurant: Restaurant, context : Context)
+    fun onClick(restaurantItemPos: Int, context : Context)
 }
