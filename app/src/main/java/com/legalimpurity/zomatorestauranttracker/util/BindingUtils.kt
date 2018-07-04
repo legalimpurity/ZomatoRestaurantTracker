@@ -2,6 +2,7 @@ package com.legalimpurity.zomatorestauranttracker.util
 
 import android.databinding.BindingAdapter
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.widget.ImageView
 import com.legalimpurity.zomatorestauranttracker.R
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
@@ -19,5 +20,6 @@ fun restaurantsAdapterBinding(recyclerView: RecyclerView,
 
 @BindingAdapter("imageUrl")
 fun loadImage(imageView: ImageView, url: String) {
-    ImageLoadingUtil().ImageLoadingWrapper(imageView.context,url,imageView, R.drawable.ic_launcher_background)
+    if(!TextUtils.isEmpty(url))
+        ImageLoadingUtil().ImageLoadingWrapper(imageView.context,url,imageView, R.drawable.ic_launcher_background)
 }

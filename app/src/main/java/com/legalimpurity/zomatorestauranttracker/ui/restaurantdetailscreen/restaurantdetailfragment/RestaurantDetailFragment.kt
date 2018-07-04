@@ -45,7 +45,10 @@ class RestaurantDetailFragment : BaseFragment<FragmentRestaurantDetailBinding, R
     private fun loadObj(bundle: Bundle?) {
         restaurant = bundle?.getParcelable(ARG_RESTAURANT_OBJ)
         restaurant?.let {
-            view?.section_label?.text = it.name
+            mRestaurantDetailFragmentModel?.titleString?.set(it.name)
+            mRestaurantDetailFragmentModel?.imageUrlString?.set(it.featured_image)
+            mRestaurantDetailFragmentModel?.restaurantId?.set(it.id)
+            mRestaurantDetailFragmentModel?.loadReviewsForRestaurant()
         }
     }
 

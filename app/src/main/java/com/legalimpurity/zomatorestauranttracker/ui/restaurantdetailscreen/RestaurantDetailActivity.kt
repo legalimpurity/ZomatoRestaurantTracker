@@ -3,6 +3,7 @@ package com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.Uri
 import android.support.design.widget.Snackbar
 
 import android.support.v4.app.Fragment
@@ -94,13 +95,27 @@ class RestaurantDetailActivity : BaseActivity<ActivityRestaurantDetailBinding, R
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_photos_url) {
+            restaurantsList?.get(container.currentItem)?.photosUrl?.let { openBrowser(it) }
+            return true
+        }
+        else if (id == R.id.action_events_url) {
+            restaurantsList?.get(container.currentItem)?.eventsUrl?.let { openBrowser(it) }
+            return true
+        }
+        else if (id == R.id.action_menu_url) {
+            restaurantsList?.get(container.currentItem)?.menuUrl?.let { openBrowser(it) }
             return true
         }
 
         return super.onOptionsItemSelected(item)
     }
 
+    private fun openBrowser(url: String)
+    {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browserIntent)
+    }
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

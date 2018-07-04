@@ -2,6 +2,8 @@ package com.legalimpurity.zomatorestauranttracker.data.remote
 
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.NearbyRestaurantsItem
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
+import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Review
+import com.legalimpurity.zomatorestauranttracker.data.model.api.response.UserReviewsItem
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Retrofit
@@ -26,8 +28,16 @@ class ApiDataHelperImpl @Inject constructor(retrofit: Retrofit): ApiDataHelper
             }
             .toList()
 
-//    override fun getReviewsResponse(resId: String): Single<List<UserReviewsItem?>?> = retrofitService!!.getReviewsResponse(resId)
-//            .map {
-//                it.userReviews
-//            }
+    override fun getReviewsResponse(resId: String): Single<List<Review?>?> = retrofitService!!.getReviewsResponse(resId)
+            .map { reviewApiResponse ->
+                reviewApiResponse.userReviews
+            }
+            .toObservable()
+            .flatMap { listOfUserReviewItems ->
+                Observable.fromIterable<UserReviewsItem>(listOfUserReviewItems)
+            }
+            .map { reviewItem ->
+                reviewItem.review
+            }
+            .toList()
 }

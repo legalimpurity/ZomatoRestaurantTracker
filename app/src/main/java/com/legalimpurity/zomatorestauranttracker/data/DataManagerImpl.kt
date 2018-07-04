@@ -2,6 +2,7 @@ package com.legalimpurity.zomatorestauranttracker.data
 
 import com.legalimpurity.zomatorestauranttracker.data.local.db.DatabaseHelper
 import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Restaurant
+import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Review
 import com.legalimpurity.zomatorestauranttracker.data.remote.ApiDataHelper
 import com.legalimpurity.zomatorestauranttracker.util.internetstateprovider.InternetStateProvider
 import io.reactivex.Observable
@@ -10,7 +11,9 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class DataManagerImpl @Inject constructor(private val apiDataHelper: ApiDataHelper, private val databaseHelper: DatabaseHelper, private val internetStateProvider: InternetStateProvider): DataManager {
+
     override fun getRemoteGeocodeResponse(lat: Double, lon: Double): Single<List<Restaurant?>> = apiDataHelper.getRemoteGeocodeResponse(lat, lon)
+    override fun getReviewsResponse(resId: String): Single<List<Review?>?>  = apiDataHelper.getReviewsResponse(resId)
 
     override fun getLocalGeocodeNearbyRestaurantsList(lat: Double, lon: Double) = databaseHelper.getLocalGeocodeNearbyRestaurantsList(lat, lon)
     override fun getLocalGeocodeResponse(lat: Double, lon: Double) = databaseHelper.getLocalGeocodeResponse(lat, lon)
