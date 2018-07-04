@@ -10,6 +10,7 @@ import com.legalimpurity.zomatorestauranttracker.ui.baseui.BaseRecyclerViewHolde
 class RestaurantsAdapter: RecyclerView.Adapter<BaseRecyclerViewHolder>()
 {
     var restaurantObjs: MutableList<Restaurant> = ArrayList()
+    var restaurantsAdapterListener : RestaurantsAdapterListener? = null
 
     override fun onBindViewHolder(holder: BaseRecyclerViewHolder, position: Int) {
         holder.onBind(position)
@@ -17,7 +18,11 @@ class RestaurantsAdapter: RecyclerView.Adapter<BaseRecyclerViewHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseRecyclerViewHolder {
         val mItemRestaurantBinding: ItemRestaurantBinding = ItemRestaurantBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return RestaurantItemViewHolder(mItemRestaurantBinding)
+        val resViewHolder = RestaurantItemViewHolder(mItemRestaurantBinding)
+        mItemRestaurantBinding.restaurantItemRootView.setOnClickListener{view ->
+            restaurantsAdapterListener?.onClick(restaurantObjs[resViewHolder.adapterPosition],view.context)
+        }
+        return resViewHolder
     }
 
     override fun getItemCount(): Int = restaurantObjs.size

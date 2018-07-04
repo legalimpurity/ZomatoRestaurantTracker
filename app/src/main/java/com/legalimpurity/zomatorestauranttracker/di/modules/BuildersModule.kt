@@ -2,6 +2,8 @@ package com.legalimpurity.zomatorestauranttracker.di.modules
 
 import com.legalimpurity.zomatorestauranttracker.ui.mainview.MainActivity
 import com.legalimpurity.zomatorestauranttracker.ui.mainview.MainActivityModule
+import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.RestaurantDetailActivity
+import com.legalimpurity.zomatorestauranttracker.ui.restaurantdetailscreen.RestaurantDetailModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -9,5 +11,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class BuildersModule {
 
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
-    abstract fun bindSplashActivity(): MainActivity
+    abstract fun bindMainActivity(): MainActivity
+
+    @ContributesAndroidInjector(modules = [RestaurantDetailModule::class])
+    abstract fun bindRestaurantDetailActivity(): RestaurantDetailActivity
 }
