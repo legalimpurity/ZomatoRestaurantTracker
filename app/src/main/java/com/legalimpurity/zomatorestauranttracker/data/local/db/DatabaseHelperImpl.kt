@@ -18,6 +18,10 @@ class DatabaseHelperImplementation @Inject constructor(private val mAppDatabase:
         nearbyRestaurantRecord.listOfIds?.let { mAppDatabase.restaurantsDAO().loadRestaurantsWithIds(it.split(",")) }
     }
 
+    override fun getLocalReviewsResponse(resId: Long): Observable<List<Review?>> = Observable.fromCallable<List<Review?>> {
+        mAppDatabase.reviewsDAO().loadReviewsByRestaurantIds(resId)
+    }
+
     override fun setLocalGeocodeResponse(lat: Double, lon: Double, listOfRestaurants: List<Restaurant?>?) = Observable.fromCallable<Boolean> {
         var stringBufferForIds = StringBuffer()
         listOfRestaurants?.forEach { restaurant ->

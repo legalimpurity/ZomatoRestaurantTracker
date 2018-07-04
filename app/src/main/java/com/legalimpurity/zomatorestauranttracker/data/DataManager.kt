@@ -12,5 +12,6 @@ interface DataManager : ApiDataHelper, DatabaseHelper
     fun getRestaurantsDataRemoteAfterCachingGeocodeResponse(lat: Double, lon: Double): Single<List<Restaurant?>>
     fun getRestaurantsDataFromRemoteAndCache(lat: Double, lon: Double): Observable<List<Restaurant?>?>
 
-    fun getRestaurantsReviewsDataFromRemoteAfterCachingResponses(resId: Long): Observable<List<Review?>>
+    fun getRestaurantsReviewsDataFromRemoteAfterCachingResponses(resId: Long): Single<List<Review?>>
+    fun getRestaurantsReviewsDataFromRemoteAndCache(resId: Long): Observable<List<Review?>>
 }

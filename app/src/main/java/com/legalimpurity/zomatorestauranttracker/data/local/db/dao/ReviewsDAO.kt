@@ -9,7 +9,7 @@ import com.legalimpurity.zomatorestauranttracker.data.model.api.response.Review
 @Dao
 interface ReviewsDAO
 {
-    @Query("SELECT * FROM Reviews where id = :restaurantId")
+    @Query("SELECT * FROM Reviews where restaurantId = :restaurantId")
     fun loadReviewsByRestaurantIds(restaurantId : Long): List<Review>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
